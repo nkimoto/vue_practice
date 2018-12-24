@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <title>My Vue App</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div id="app">
+        <h1>
+            <button @click="purge">Purge</button>
+            My Todos
+            <span class="info">
+                ({{ remaining.length }}/{{ todos.length }})
+            </span>
+        </h1>
+        <ul v-if="todos.length">            
+            <li v-for="(todo, index) in todos">
+                <input type="checkbox" v-model="todo.isDone">
+                <span :class="{done: todo.isDone}">{{ todo.title }}</span>
+                <span @click="DeleteItem(index)" class="command">[x]</span>
+            </li>
+        </ul>
+        <ul v-else>
+            <li>Nothing to do, yay!</li>
+        </ul>
+        <form @submit.prevent="AddItem">
+            <input type="text" v-model="newItem">
+            <input type="submit" value="Add">
+        </form>
+        <like-component></like-component>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="js/main.js"></script>  
+</body>
+</html>
